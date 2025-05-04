@@ -19,35 +19,37 @@ Project Structure
 Prerequisites
 Python 3.8+
 PostgreSQL
-Docker and Docker Compose (optional, for containerized setup)
-Installation and Setup
-Option 1: Local Setup
+
+
+Local Setup
 Clone the repository:
-bash
+
 git clone https://github.com/yourusername/fastapi-jwt-rbac.git
 cd fastapi-jwt-rbac
 Create and activate a virtual environment:
-bash
+
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 Install the dependencies:
-bash
+
 pip install -r requirements.txt
+
+
 Set up PostgreSQL:
 Install PostgreSQL if not already installed
 Create a database named jwt_rbac_db
 Update the database URL in models.py if needed
+
+
 Run the application:
-bash
+
 uvicorn main:app --reload
 Option 2: Docker Setup
 Clone the repository:
-bash
+
 git clone https://github.com/yourusername/fastapi-jwt-rbac.git
 cd fastapi-jwt-rbac
-Build and run the Docker containers:
-bash
-docker-compose up --build
+Build and run 
 API Endpoints
 Authentication Endpoints
 Register a new user
@@ -59,6 +61,9 @@ json
   "password": "password123",
   "role": "user"  // or "admin"
 }
+
+
+
 Login and get access token
 POST /login
 Request Body:
@@ -115,6 +120,8 @@ DELETE /projects/{project_id}
 Headers: Authorization: Bearer JWT_TOKEN
 User Endpoints
 Get all users (accessible only to admin users)
+
+
 GET /users
 Headers: Authorization: Bearer JWT_TOKEN
 Security Notes
@@ -123,6 +130,8 @@ Store sensitive configuration like the secret key in environment variables, not 
 Always use HTTPS in production.
 Consider implementing token refresh mechanism for better security.
 Testing the API
+
+
 After starting the application, you can access the interactive API documentation at http://localhost:8000/docs.
 Register a new user:
 Use the /register endpoint to create a user (role: "user") and an admin (role: "admin").
@@ -134,12 +143,6 @@ Enter your token in the format Bearer YOUR_TOKEN.
 Test the endpoints with different user roles:
 Try accessing admin-only endpoints with a regular user token.
 Try accessing all endpoints with an admin token.
-Video Demonstration
-A video demonstration of setting up and using this project can be found here.
-
-License
-This project is licensed under the MIT License.
-
 
 
 
@@ -167,3 +170,30 @@ Login with either user to get JWT tokens
 Use the "Authorize" button in Swagger UI to set your token
 Test different endpoints with different user roles
 
+
+
+
+
+Here is .env demo 
+# PostgreSQL Configuration
+POSTGRES_SERVER=db
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DB=fastapi_db
+
+# FastAPI Configuration
+APP_NAME="Project Management API"
+SECRET_KEY=askjdfhadslfhiuadshfkjldfakljsfakj
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# For local development without Docker, use:
+# POSTGRES_SERVER=localhost
+
+
+# Database configuration
+
+DATABASE_URL = "postgresql+psycopg2://myuser:1234@localhost/jwt_rbac_db"
+
+
+# Server configuration
+DEBUG=True
